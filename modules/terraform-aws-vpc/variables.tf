@@ -1,11 +1,21 @@
-variable "vpc_aws_region" {
-  type = string
+
+variable "stack_name" {
+  type        = string
+  description = "Name of the Stack"
 }
 
-variable "vpc_aws_profile" {
-  type = string
+
+variable "public_subnets_cidr" {
+  type        = list(any)
+  description = "The CIDR block for the public subnet"
 }
 
-variable "vpc_stack_name" {
-  type = string
+variable "private_subnets_cidr" {
+  type        = list(any)
+  description = "The CIDR block for the private subnet"
+}
+
+variable "availability_zones" {
+  type        = list(any)
+  description = "The az that the resources will be launched"
 }

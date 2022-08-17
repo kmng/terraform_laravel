@@ -1,25 +1,11 @@
-variable "stack_name" {
-  type = string
-}
-
-variable "aws_region" {
-  type = string
-}
-
-variable "aws_profile" {
-  type = string
-}
-
 
 
 module "vpc" {
-  source     = "./modules/terraform-aws-vpc"
-  vpc_stack_name = var.stack_name
-  vpc_aws_region = var.aws_region
-  vpc_aws_profile = var.aws_profile
+  source               = "./modules/terraform-aws-vpc"
+  stack_name     = var.stack_name
+  public_subnets_cidr  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  private_subnets_cidr = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+  availability_zones   = ["us-west-2a", "us-west-2b", "us-west-2c"]
 
 }
 
-output "vpc_id" {
-  value = module.vpc.vpc_id
-}
