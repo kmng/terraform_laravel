@@ -32,3 +32,9 @@ variable "user_data" {
   type        = string
   description = "User Data for EC2"
 }
+
+
+variable "private_key" {
+  type        = string
+  description = "Private Key"
+}

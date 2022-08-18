@@ -16,8 +16,8 @@ module "ec2" {
   private_subnet_ids = module.vpc.private_subnet_ids
   public_subnet_ids  = module.vpc.public_subnet_ids
 
-  user_data = base64encode(file("install.sh"))
-
+  user_data   = base64encode(file("install.sh"))
+  private_key = file("terraform.pem")
 
   vpc_id = module.vpc.vpc_id
 
