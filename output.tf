@@ -4,5 +4,5 @@ output "vpc_id" {
 
 
 output "alb_url" {
-  value = module.ec2.alb_url
+  value = module.ec2-laravel.alb_url
 }

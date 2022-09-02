@@ -10,16 +10,34 @@ module "vpc" {
 }
 
 
-module "ec2" {
-  source             = "./modules/terraform-aws-ec2"
+# module "ec2" {
+#   source             = "./modules/terraform-aws-ec2"
+#   stack_name         = var.stack_name
+#   private_subnet_ids = module.vpc.private_subnet_ids
+#   public_subnet_ids  = module.vpc.public_subnet_ids
+
+#   user_data   = base64encode(file("install.sh"))
+#   private_key = file("terraform.pem")
+
+#   vpc_id = module.vpc.vpc_id
+
+
+# }
+
+
+module "ec2-laravel" {
+  source             = "./modules/terraform-aws-ec2-laravel"
   stack_name         = var.stack_name
   private_subnet_ids = module.vpc.private_subnet_ids
   public_subnet_ids  = module.vpc.public_subnet_ids
 
-  user_data   = base64encode(file("install.sh"))
+  user_data   = base64encode(file("install-laravel.sh"))
   private_key = file("terraform.pem")
 
   vpc_id = module.vpc.vpc_id
 
 
 }
+
+
+
