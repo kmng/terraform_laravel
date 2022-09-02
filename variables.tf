@@ -9,3 +9,17 @@ variable "aws_region" {
 variable "aws_profile" {
   type = string
 }
+
+
+variable "db_database" {
+  type = string
+}
+
+
+variable "db_username" {
+  type = string
+}
+
+variable "db_password" {
+  type = string
+}

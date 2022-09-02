@@ -34,6 +34,10 @@ cd /var/www/html/
 git clone https://github.com/kmng/Laravel57Source.git
 cd /var/www/html/Laravel57Source
 cp /var/www/html/Laravel57Source/.env.example /var/www/html/Laravel57Source/.env 
+sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${db_host}/g' /var/www/html/Laravel57Source/.env 
+sed -i 's/DB_DATABASE=homestead/DB_DATABASE=${db_database}/g' /var/www/html/Laravel57Source/.env 
+sed -i 's/DB_USERNAME=homestead/DB_USERNAME=${db_username}/g' /var/www/html/Laravel57Source/.env 
+sed -i 's/DB_PASSWORD=secret/DB_PASSWORD=${db_password}/g' /var/www/html/Laravel57Source/.env 
 composer install --no-plugins
 sudo chgrp -R apache /var/www/html/Laravel57Source/storage /var/www/html/Laravel57Source/bootstrap/cache
 sudo chmod -R ug+rwx /var/www/html/Laravel57Source/storage /var/www/html/Laravel57Source/bootstrap/cache
@@ -43,4 +47,6 @@ sed -i 's/<Directory "\/var\/www">/<Directory "\/var\/www\/html\/Laravel57Source
 sed -i '0,/AllowOverride None/s//AllowOverride All/' /etc/httpd/conf/httpd.conf
 php artisan key:generate
 php artisan config:cache
+php artisan make:auth
+php artisan migrate
 systemctl restart httpd

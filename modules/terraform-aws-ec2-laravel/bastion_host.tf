@@ -6,6 +6,11 @@ resource "aws_instance" "bastion_host" {
   security_groups = [aws_security_group.web.id]
   subnet_id       = element(var.public_subnet_ids, 0)
 
+  user_data = <<EOF
+#!/bin/sh
+yum install -y mysql
+EOF
+
   provisioner "file" {
     source      = "terraform.pem"
     destination = "terraform.pem"

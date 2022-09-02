@@ -31,7 +31,15 @@ module "ec2-laravel" {
   private_subnet_ids = module.vpc.private_subnet_ids
   public_subnet_ids  = module.vpc.public_subnet_ids
 
-  user_data   = base64encode(file("install-laravel.sh"))
+  user_data = base64encode(templatefile("install-laravel.sh", {
+
+    db_host     = module.rds-laravel.db_host
+    db_database = var.db_database
+    db_username = var.db_username
+    db_password = var.db_password
+
+    }
+  ))
   private_key = file("terraform.pem")
 
   vpc_id = module.vpc.vpc_id
@@ -39,5 +47,22 @@ module "ec2-laravel" {
 
 }
 
+
+module "rds-laravel" {
+  source             = "./modules/terraform-aws-rds"
+  stack_name         = var.stack_name
+  private_subnet_ids = module.vpc.private_subnet_ids
+  public_subnet_ids  = module.vpc.public_subnet_ids
+
+  db_database = var.db_database
+  db_username = var.db_username
+  db_password = var.db_password
+
+
+
+  vpc_id = module.vpc.vpc_id
+
+
+}
 
 
