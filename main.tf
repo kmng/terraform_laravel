@@ -36,7 +36,7 @@ module "ec2-laravel" {
     db_host     = module.rds-laravel.db_host
     db_database = var.db_database
     db_username = var.db_username
-    db_password = var.db_password
+    db_password = module.rds-laravel.db_password
 
     }
   ))
@@ -56,8 +56,6 @@ module "rds-laravel" {
 
   db_database = var.db_database
   db_username = var.db_username
-  db_password = var.db_password
-
 
 
   vpc_id = module.vpc.vpc_id

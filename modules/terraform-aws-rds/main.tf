@@ -1,3 +1,9 @@
+resource "random_password" "db_password" {
+  length  = 16
+  special = false
+}
+
+
 #create aws rds subnet groups
 resource "aws_db_subnet_group" "database_subnet_group" {
   name       = "mydbsg"
@@ -20,7 +26,7 @@ resource "aws_db_instance" "database_instance" {
   db_name                = var.db_database
   identifier             = "mysqldb"
   username               = var.db_username
-  password               = var.db_password
+  password               = random_password.db_password.result
   parameter_group_name   = "default.mysql5.7"
   skip_final_snapshot    = true
   tags = {
