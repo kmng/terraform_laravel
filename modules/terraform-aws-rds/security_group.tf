@@ -34,3 +34,28 @@ resource "aws_security_group" "db" {
     Terraform = "true"
   }
 }
+
+
+resource "aws_security_group" "redis" {
+  vpc_id = var.vpc_id
+
+
+  ingress {
+    from_port   = 6379
+    to_port     = 6379
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 6379
+    to_port     = 6379
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
+  tags = {
+    Name      = "redis-firewall-${var.stack_name}"
+    Terraform = "true"
+  }
+}

@@ -11,7 +11,7 @@ sed -i "s/sleep(.*)/sleep(10)/" install
 ./install auto
 # Installing PHP and required extensions
 amazon-linux-extras install -y php7.2
-yum install -y  php-mbstring php-pdo php-soap php-xml php-mysqlnd php-gd php-json
+yum install -y  php-mbstring php-pdo php-soap php-xml php-mysqlnd php-gd php-json php-redis
 # Insalling Web Server
 yum install -y httpd
 systemctl start httpd
@@ -19,6 +19,7 @@ systemctl enable httpd
 # Installing Composer
 sudo curl -sS https://getcomposer.org/installer | sudo php
 sudo mv composer.phar /usr/local/bin/composer
+chmod +x /usr/local/bin/composer
 sudo ln -s /usr/local/bin/composer /usr/bin/composer
 export COMPOSER_HOME="$HOME/.config/composer"
 # Assigning Permissions to Folder
@@ -38,7 +39,8 @@ sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${db_host}/g' /var/www/html/Laravel57Source/
 sed -i 's/DB_DATABASE=homestead/DB_DATABASE=${db_database}/g' /var/www/html/Laravel57Source/.env 
 sed -i 's/DB_USERNAME=homestead/DB_USERNAME=${db_username}/g' /var/www/html/Laravel57Source/.env 
 sed -i 's/DB_PASSWORD=secret/DB_PASSWORD=${db_password}/g' /var/www/html/Laravel57Source/.env 
-composer install --no-plugins
+sed -i 's/REDIS_HOST=127.0.0.1/REDIS_HOST=${redis_host}/g' /var/www/html/Laravel57Source/.env 
+sudo composer install 
 sudo chgrp -R apache /var/www/html/Laravel57Source/storage /var/www/html/Laravel57Source/bootstrap/cache
 sudo chmod -R ug+rwx /var/www/html/Laravel57Source/storage /var/www/html/Laravel57Source/bootstrap/cache
 # Changing Document Root

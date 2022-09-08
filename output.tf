@@ -21,3 +21,9 @@ output "db_password" {
   value     = module.rds-laravel.db_password
   sensitive = true
 }
+
+
+output "redis_endpoint" {
+  value     = module.rds-laravel.redis_endpoint
+  sensitive = true
+}
