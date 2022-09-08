@@ -45,7 +45,6 @@ sudo chmod -R ug+rwx /var/www/html/Laravel57Source/storage /var/www/html/Laravel
 sed -i 's/DocumentRoot "\/var\/www\/html"/DocumentRoot "\/var\/www\/html\/Laravel57Source\/public"/g' /etc/httpd/conf/httpd.conf
 sed -i 's/<Directory "\/var\/www">/<Directory "\/var\/www\/html\/Laravel57Source">/g' /etc/httpd/conf/httpd.conf
 sed -i '0,/AllowOverride None/s//AllowOverride All/' /etc/httpd/conf/httpd.conf
-php artisan key:generate
 php artisan config:cache
 php artisan make:auth
 php artisan migrate
