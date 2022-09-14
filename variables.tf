@@ -20,4 +20,8 @@ variable "db_username" {
   type = string
 }
 
+variable "git_token" {
+  type = string
+}
+
 

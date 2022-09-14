@@ -38,6 +38,7 @@ module "ec2-laravel" {
     db_username = var.db_username
     db_password = module.rds-laravel.db_password
     redis_host  = module.rds-laravel.redis_host
+    git_token   = var.git_token
 
     }
   ))

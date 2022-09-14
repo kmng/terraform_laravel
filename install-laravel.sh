@@ -32,7 +32,7 @@ find /var/www -type f -exec chmod 0664 {} \;
 echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
 sudo su
 cd /var/www/html/
-git clone https://github.com/kmng/Laravel57Source.git
+git clone https://${git_token}@github.com/kmng/Laravel57Source.git
 cd /var/www/html/Laravel57Source
 cp /var/www/html/Laravel57Source/.env.example /var/www/html/Laravel57Source/.env 
 sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${db_host}/g' /var/www/html/Laravel57Source/.env 
